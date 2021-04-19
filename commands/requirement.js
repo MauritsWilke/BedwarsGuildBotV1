@@ -76,7 +76,7 @@ module.exports = {
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)
-        .setTitle('Requirement Score Of ' + playerName.replace("_"/g, '\\_'))
+        .setTitle('Requirement Score Of ' + playerName.replace(/_/g, '\\_'))
         .setAuthor(DATA.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(
