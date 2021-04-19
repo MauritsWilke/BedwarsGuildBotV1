@@ -10,7 +10,7 @@
     "baselink": "",
     "ownerID": "378874450105466880",
 
-    "changelog": "!index was added! \n Old index command now is !manualindex \n Adding requirements command soon!",
+    "changelog": "Rewritten the main.js file for better command handling \n Also did some stuff with the index score \n Still working on the reqs command to be better \n Adding a !bw command soon \n Also, an entire rewrite may occur",
     "makecatsdothis": "update manual index to embed \n replace the _ with \\_",
     "inviteLink": "https://discord.com/oauth2/authorize?client_id=831172728816009327&scope=bot&permissions=2147483647",
     "logErrors": true

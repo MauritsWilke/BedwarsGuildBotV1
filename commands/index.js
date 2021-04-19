@@ -45,7 +45,7 @@ module.exports = {
         let colour;
 
         if(playerStar < 100) colour = '#AAAAAA';
-        else if(playerStar > 100 && playerStar < 200) colour = '#FFFFFF';
+        else if(playerStar > 100 && playerStar < 200) colour = '#FAFAFA';
         else if(playerStar > 200 && playerStar < 300) colour = '#FFAA00';
         else if(playerStar > 300 && playerStar < 400) colour = '#55FFFF';
         else if(playerStar > 400 && playerStar < 500) colour = '#00AA00';

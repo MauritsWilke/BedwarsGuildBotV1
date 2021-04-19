@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const gm  = new Discord.GuildMember();
 const fs = require('fs');
 var DATA = require("./data.json");
 var packageLock = require("./package-lock.json");
@@ -24,33 +25,33 @@ client.once('ready', () => {
     client.user.setPresence({
         status: 'online',
         activity: {
-            name: "!reqs IGN for verification!",
-            type: ""
+            name: "!reqs",
+            type: "PLAYING"
         }
     });
 })
 
 client.on('message', message => {
-    var date = new Date();
-    var timestamp = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' | ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
     if (!message.content.startsWith(DATA.prefix) || message.author.bot) return;
     if (message.guild === null) {
         message.author.send("I am unavailable in DM's, please use me in a server!");
         return;
     }
-
+    let date = new Date();
+    let timestamp = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' | ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     const args = message.content.slice(DATA.prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
-    try {
-        client.commands.get(command).execute(message, args, Discord, client);
-        console.log(command + " was used by [" + message.author.username + "] in server [" + message.guild.name + "] at [" + timestamp + "]");
-    } catch (error) {
-        // message.channel.send('There might have been an error processing this command, or the command does not exist.');
-        if (DATA.logErrors) console.log(error);
-    };
-
+    if(client.commands.find(e => e.name === command)){
+        try {
+            client.commands.get(command).execute(message, args, Discord, client);
+            console.log(command + " was used by [" + message.author.username + "] in server [" + message.guild.name + "] at [" + timestamp + "]");
+        } catch (error) {
+            // message.channel.send('There might have been an error processing this command, or the command does not exist.');
+            if (DATA.logErrors) console.log(error);
+        };
+    }
 })
 
 // client.on('guildMemberAdd', guildMember =>{
@@ -60,5 +61,11 @@ client.on('message', message => {
 //     guildMember.guild.channels.cache.get('798114509675167767').send(`Welcome to ` + guildMember.guild.name + `, <@${guildMember.user.id}>!`);
 
 // });
+
+client.on('guildMemberRemove',(member) => {
+
+    
+    
+});
 
 client.login(DATA.token);
