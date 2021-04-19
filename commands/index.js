@@ -58,7 +58,7 @@ module.exports = {
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)
-        .setTitle('Index Score of ' + playerName.replaceAll("_","\\_"))
+        .setTitle('Index Score of ' + playerName.replace("_"/g, '\\_'))
         .setAuthor(DATA.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(
