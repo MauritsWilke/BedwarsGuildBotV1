@@ -53,7 +53,7 @@ module.exports = {
             playerDiscord = "This player has not linked their discord"; return playerDiscord;
         }
 
-        const checkForDiscord
+        // const checkForDiscord
         // const isInDiscord = () =>{
         //     if(checkForDiscord() !== "This player has not linked their discord"){
         //         if(client.users.cache.find(u => u.tag === checkForDiscord()).id === message.guild.members(client.users.cache.find(u => u.tag === checkForDiscord()).id)){
