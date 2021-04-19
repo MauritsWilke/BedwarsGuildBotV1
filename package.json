@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Custom Discord Bot",
   "main": "main.js",
-  "scripts": {
-    "start": "node server.js"
-  },
+  
   "author": "I_Like_Cats__",
   "license": "ISC",
   "dependencies": {
