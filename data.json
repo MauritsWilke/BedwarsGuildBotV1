@@ -1,0 +1,18 @@
+{
+    "name": "Bedwars Guild Bot",
+    "version": "1.0.1",
+    "description": "Custom Discord Bot",
+    "prefix": "!",
+    "colour": "#FFFFFF",
+
+    "token": "ODE1OTg2NzAxMDcxNTQ4NDI3.YD0Y1Q.X0mSOCzI4JsxT0bydQkBsm_Y3KA",
+    "hypixelAPIKey": "3e5f1f0c-9441-479c-b2f8-3899cf8c2934",
+    "baselink": "",
+    "ownerID": "378874450105466880",
+
+    "changelog": "!index was added! \n Old index command now is !manualindex \n Adding requirements command soon!",
+    "makecatsdothis": "update manual index to embed \n replace the _ with \\_",
+    "inviteLink": "https://discord.com/oauth2/authorize?client_id=831172728816009327&scope=bot&permissions=2147483647",
+    "logErrors": true
+  }
+  
