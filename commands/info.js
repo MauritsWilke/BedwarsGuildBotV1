@@ -18,7 +18,7 @@ module.exports = {
         .setAuthor(DATA.name, client.user.displayAvatarURL())
         .setThumbnail(client.user.displayAvatarURL())
         .addFields(
-            { name: 'Ping', value: `${Date.now() - message.createdTimestamp}ms`, inline: true},
+            { name: 'Ping', value: `${client.ws.ping}ms`, inline: true},
             { name: 'Uptime', value: `${hours}h ${minutes}m ${seconds}s`, inline: true},
             { name: 'Dev', value: `${DATA.ownerDiscord}`, inline: true},
 

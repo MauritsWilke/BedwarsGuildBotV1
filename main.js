@@ -5,13 +5,14 @@ var DATA = require("./data.json");
 var packageLock = require("./package-lock.json");
 const memberCounter = require('./counters/member-counter');
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"]});
-let clientToken;
+let clientPrefix;
 
 if(DATA.devMode === true){
-    clientToken == DATA.dprefix;
+    clientPrefix = DATA.dprefix;
 }else {
-    clientToken == DATA.prefix;
+    clientPrefix = DATA.prefix;
 }
+console.log(clientPrefix)
 
 client.commands = new Discord.Collection();
 
@@ -35,18 +36,41 @@ client.once('ready', () => {
             type: "PLAYING"
         }
     });
+
+    const newEmbed = new Discord.MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle(DATA.name + " is online")
+    .setAuthor(DATA.name, client.user.displayAvatarURL())
+    .setThumbnail(client.user.displayAvatarURL())
+    .addFields(
+        { name: 'Started at', value: `${Date().toString().slice(4,24)}`, inline: true},
+        { name: 'Version', value: `${DATA.version}`, inline: true},
+        { name: 'Discord.js', value: `v${packageLock.packages['node_modules/discord.js'].version}`, inline: true},
+
+        { name: 'Dev Mode ', value: DATA.devMode, inline: true},
+        { name: 'Prefix', value: clientPrefix, inline: true},
+        { name: 'Ping', value: client.ws.ping, inline: true}
+    )
+    .setTimestamp()
+    .setFooter(DATA.name);
+
+    (async () => {
+        const user = await client.users.fetch(DATA.ownerID);
+        user.send(newEmbed);
+    })()
+
 })
 
 client.on('message', message => {
 
-    if (!message.content.startsWith(DATA.prefix) || message.author.bot) return;
+    if (!message.content.startsWith(clientPrefix) || message.author.bot) return;
     if (message.guild === null) {
         message.author.send("I am unavailable in DM's, please use me in a server!");
         return;
     }
     let date = new Date();
     let timestamp = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' | ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    const args = message.content.slice(DATA.prefix.length).split(/ +/);
+    const args = message.content.slice(clientPrefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
     if(client.commands.find(e => e.name === command)){
