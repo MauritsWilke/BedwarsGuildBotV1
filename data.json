@@ -6,11 +6,13 @@
     "colour": "#FFFFFF",
 
     "token": "ODE1OTg2NzAxMDcxNTQ4NDI3.YD0Y1Q.X0mSOCzI4JsxT0bydQkBsm_Y3KA",
+    "token2": "ODMzNzI3NTg1MzAxMTY4MTQ4.YH2jUg.qDr92LEdiD0Zo6kk-9Afa0Awz9o",
     "hypixelAPIKey": "3e5f1f0c-9441-479c-b2f8-3899cf8c2934",
     "baselink": "",
     "ownerID": "378874450105466880",
+    "ownerDiscord": "The Almighty One#3989",
 
-    "changelog": "Rewritten the main.js file for better command handling \n Also did some stuff with the index score \n Still working on the reqs command to be better \n Adding a !bw command soon \n Also, an entire rewrite may occur",
+    "changelog": "24/7 Hosting! 🥳 \nAdded !info\nTesting bot created\nFixed some bugs (as usual)\nAdded some bugs (as usual)",
     "makecatsdothis": "update manual index to embed \n replace the _ with \\_",
     "inviteLink": "https://discord.com/oauth2/authorize?client_id=831172728816009327&scope=bot&permissions=2147483647",
     "logErrors": true
