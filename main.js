@@ -3,10 +3,16 @@ const gm  = new Discord.GuildMember();
 const fs = require('fs');
 var DATA = require("./data.json");
 var packageLock = require("./package-lock.json");
-
 const memberCounter = require('./counters/member-counter');
-
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"]});
+let clientToken;
+
+if(DATA.devMode === true){
+    clientToken == DATA.dprefix;
+}else {
+    clientToken == DATA.prefix;
+}
+
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -68,4 +74,10 @@ client.on('guildMemberRemove',(member) => {
     
 });
 
-client.login(DATA.token);
+if(DATA.devMode === true){
+    client.login(DATA.token2);
+    console.log("!! IN DEV MODE !!");
+}else {
+    client.login(DATA.token);
+    console.log("Global Mode");
+}
