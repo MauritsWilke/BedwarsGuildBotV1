@@ -14,7 +14,7 @@ module.exports = {
             .setColor('#FAFAFA')
             .setTitle('Manual Index Score')
             .setAuthor(DATA.name, client.user.displayAvatarURL())
-            .setThumbnail("https://cdn.discordapp.com/attachments/834039658391928852/834040291391438868/plusminus.png")
+            .setThumbnail("https://cdn.discordapp.com/attachments/834039658391928852/834052585711075328/math.png")
             .addFields(
                 { name: 'Star', value: args[0], inline: true},
                 { name: 'FKDR', value: args[1], inline: true},
