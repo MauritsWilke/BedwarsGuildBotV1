@@ -11,14 +11,24 @@ module.exports = {
         
         const getID = async (username) => {
             const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
-            if(response.status !== 200){
-                message.channel.send("That's not a valid username!"); return;
-            }
+            if(response.status !== 200) return;
             const data = await response.json();
             return data;
         };
         
         let player = await getID(args[0]);
+        if(player === undefined){
+            const doesntExist = new Discord.MessageEmbed()
+            .setColor(`#FF5555`)
+            .setTitle(`${args[0]} is not a valid username!`)
+            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setTimestamp()
+            .setFooter(DATA.name);
+
+            message.channel.send(doesntExist)
+            return;
+        }
+
         let playerHead = `https://minotar.net/helm/${player.id}`
 
         if(player.id === undefined){

@@ -11,9 +11,7 @@ module.exports = {
         
         const getID = async (username) => {
             const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
-            if(response.status !== 200){
-                message.channel.send("That's not a valid username!"); return;
-            }
+            if(response.status !== 200) return;
             const data = await response.json();
             return data;
         };
@@ -33,7 +31,19 @@ module.exports = {
         }
 
         // LET STUFF
-        let apiData = await getID(args[0]);
+        let apiData = await getID(escape(args[0]));
+        if(apiData === undefined){
+            const doesntExist = new Discord.MessageEmbed()
+            .setColor(`#FF5555`)
+            .setTitle(`${args[0]} is not a valid username!`)
+            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setTimestamp()
+            .setFooter(DATA.name);
+
+            message.channel.send(doesntExist)
+            return;
+        }
+
         let playerHead = `https://minotar.net/helm/${apiData.id}`
         let playerData = await hyData(apiData.id);
         if(!playerData || !playerHead || !apiData.id) return;
@@ -44,6 +54,19 @@ module.exports = {
         let playerFKDR = (playerData?.player?.stats?.Bedwars?.final_kills_bedwars / playerData?.player?.stats?.Bedwars?.final_deaths_bedwars).toFixed(2);
         let indexScore = ((playerStar *playerFKDR*playerFKDR)/10).toFixed(2);
         let colour = colours[Math.floor(playerStar/100)];
+
+        if(playerStar === undefined){
+            const notPlayed = new Discord.MessageEmbed()
+            .setColor(`#FF5555`)
+            .setTitle(apiData.name + ' has not played bedwars')
+            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setThumbnail(playerHead)
+            .setTimestamp()
+            .setFooter(DATA.name);
+
+            message.channel.send(notPlayed)
+            return;
+        }  
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)
