@@ -15,10 +15,10 @@ module.exports = {
                 message.channel.send("That's not a valid username!"); return;
             }
             const data = await response.json();
-            return data.id;
+            return data;
         };
         const hyData = async (playerUUID) => {
-            const response = await fetch(`https://api.hypixel.net/player?uuid=${playerUUID}&key=${DATA.hypixelAPIKey}`);
+            const response = await fetch(`https://api.hypixel.net/player?uuid=${apiData.id}&key=${DATA.hypixelAPIKey}`);
             if(response.status !== 200){
                 message.channel.send("There might be an API outtage"); return;
             }else if(response.player === null){
@@ -33,10 +33,10 @@ module.exports = {
         }
 
         // LET STUFF
-        let UUID = await getID(args[0]);
-        let playerHead = `https://minotar.net/helm/${UUID}`
-        let playerData = await hyData(UUID);
-        if(!playerData || !playerHead || !UUID) return;
+        let apiData = await getID(args[0]);
+        let playerHead = `https://minotar.net/helm/${apiData.id}`
+        let playerData = await hyData(apiData.id);
+        if(!playerData || !playerHead || !apiData.id) return;
         else {
 
         let playerName = playerData?.player?.displayname;    
@@ -47,7 +47,7 @@ module.exports = {
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)
-        .setTitle('Index Score of ' + playerName.replace(/_/g, '\\_'))
+        .setTitle('Index Score of ' + apiData.name.replace(/_/g, '\\_'))
         .setAuthor(DATA.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(

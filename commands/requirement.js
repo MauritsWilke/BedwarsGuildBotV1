@@ -15,7 +15,7 @@ module.exports = {
                 message.channel.send("That's not a valid username!"); return;
             }
             const data = await response.json();
-            return data.id;
+            return data;
         };
         const hyData = async (playerUUID) => {
             const response = await fetch(`https://api.hypixel.net/player?uuid=${playerUUID}&key=${DATA.hypixelAPIKey}`);
@@ -32,11 +32,11 @@ module.exports = {
             return `${s}`;
         }
 
-        let UUID = await getID(args[0]);
-        let playerHead = `https://minotar.net/helm/${UUID}`
-        let playerData = await hyData(UUID);
+        let apiData = await getID(args[0]);
+        let playerHead = `https://minotar.net/helm/${apiData.id}`
+        let playerData = await hyData(apiData.id);
 
-        if(!playerData || !playerHead || !UUID){message.channel.send("Something went wrong, please try again later."); return;}
+        if(!playerData || !playerHead || !apiData.id){message.channel.send("Something went wrong, please try again later."); return;}
         else {
 
         let playerName = playerData?.player?.displayname;    
@@ -74,7 +74,7 @@ module.exports = {
         if(playerName === undefined){
             const notPlayed = new Discord.MessageEmbed()
             .setColor(`#FF5555`)
-            .setTitle( args[0] + ' has not joined Hypixel')
+            .setTitle(apiData.name + ' has not joined Hypixel')
             .setAuthor(DATA.name, client.user.displayAvatarURL())
             .setThumbnail(playerHead)
             .setTimestamp()
@@ -86,7 +86,7 @@ module.exports = {
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)
-        .setTitle('Requirement Score Of ' + playerName.replace(/_/g, '\\_'))
+        .setTitle('Requirement Score Of ' + apiData.name.replace(/_/g, '\\_'))
         .setAuthor(DATA.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(
