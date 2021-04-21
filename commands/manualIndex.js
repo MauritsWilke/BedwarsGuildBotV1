@@ -5,7 +5,7 @@ module.exports = {
     description: "Invitation link for the bot",
     execute(message, args, Discord, client){
 
-        if(!args[0] || !args[1] || isNaN(args[0]) || isNaN(args[1])){ message.channel.send('Please include a ``Star`` and an ``FKDR``'); return;}
+        if(!args[0] || !args[1] || isNaN(args[0].replace(",",".")) || isNaN(args[1].replace(",","."))){ message.channel.send('Please include a ``Star`` and an ``FKDR``'); return;}
         else{
             let indexScore = (args[0].replace(",",".") * args[1].replace(",",".") * args[1].replace(",","."))/10;
             
@@ -16,9 +16,9 @@ module.exports = {
             .setAuthor(DATA.name, client.user.displayAvatarURL())
             .setThumbnail("https://cdn.discordapp.com/attachments/834039658391928852/834086824309293097/math.png")
             .addFields(
-                { name: 'Star', value: args[0], inline: true},
-                { name: 'FKDR', value: args[1], inline: true},
-                { name: 'Index score', value: indexScore, inline: false},
+                { name: 'Star', value: args[0].replace(",","."), inline: true},
+                { name: 'FKDR', value: args[1].replace(",","."), inline: true},
+                { name: 'Index score', value: indexScore.toFixed(2), inline: false},
             )
             .setTimestamp()
             .setFooter(DATA.name);

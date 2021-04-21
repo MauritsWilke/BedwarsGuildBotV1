@@ -63,7 +63,6 @@ module.exports = {
         }
 
         let colour = '#FF5555';
-
         let meetsOne = `:x:`;
         let meetsTwo = `:x:`;
         let meetsThree = `:x:`;
@@ -71,8 +70,19 @@ module.exports = {
         if(checkForDiscord() !== "This player has not linked their discord") meetsOne = ':white_check_mark:';
         if(daysBetween < 7) meetsTwo = ':white_check_mark:';
         if(indexScore > 30) meetsThree = ':white_check_mark:';
-
         if(indexScore > 30 && daysBetween < 7 && checkForDiscord() !== "This player has not linked their discord") colour = '#55FF55';
+        if(playerName === undefined){
+            const notPlayed = new Discord.MessageEmbed()
+            .setColor(`#FF5555`)
+            .setTitle( args[0] + ' has not joined Hypixel')
+            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setThumbnail(playerHead)
+            .setTimestamp()
+            .setFooter(DATA.name);
+
+            message.channel.send(notPlayed)
+            return;
+        }
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)
