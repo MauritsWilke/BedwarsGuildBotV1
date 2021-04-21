@@ -1,5 +1,6 @@
 const DATA = require('../data.json');
 const fetch = require('node-fetch');
+const colours = require('../colours.json');
 
 module.exports = {
     name: 'index',
@@ -38,23 +39,11 @@ module.exports = {
         if(!playerData || !playerHead || !UUID) return;
         else {
 
-        let playerName = playerData.player.displayname;    
-        let playerStar = playerData.player.achievements.bedwars_level;
-        let playerFKDR = (playerData.player.stats.Bedwars.final_kills_bedwars / playerData.player.stats.Bedwars.final_deaths_bedwars).toFixed(2);
+        let playerName = playerData?.player?.displayname;    
+        let playerStar = playerData?.player?.achievements?.bedwars_level;
+        let playerFKDR = (playerData?.player?.stats?.Bedwars?.final_kills_bedwars / playerData?.player?.stats?.Bedwars?.final_deaths_bedwars).toFixed(2);
         let indexScore = ((playerStar *playerFKDR*playerFKDR)/10).toFixed(2);
-        let colour;
-
-        if(playerStar < 100) colour = '#AAAAAA';
-        else if(playerStar > 100 && playerStar < 200) colour = '#FAFAFA';
-        else if(playerStar > 200 && playerStar < 300) colour = '#FFAA00';
-        else if(playerStar > 300 && playerStar < 400) colour = '#55FFFF';
-        else if(playerStar > 400 && playerStar < 500) colour = '#00AA00';
-        else if(playerStar > 500 && playerStar < 600) colour = '#00AAAA';
-        else if(playerStar > 600 && playerStar < 700) colour = '#AA0000';
-        else if(playerStar > 700 && playerStar < 800) colour = '#FF55FF';
-        else if(playerStar > 800 && playerStar < 900) colour = '#5555FF';
-        else if(playerStar > 900 && playerStar < 1000) colour = '#AA00AA';
-        else if(playerStar > 1000) colour == '#000000';
+        let colour = colours[Math.floor(playerStar/100)];
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)

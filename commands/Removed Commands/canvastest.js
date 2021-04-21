@@ -12,6 +12,7 @@ module.exports = {
         //CANVAS SHIT
         let canvas = Canvas.createCanvas(canvasWidth, canvasHeight);
         let ctx = canvas.getContext("2d");
+
         ctx.imageSmoothingEnabled = false;
 
         (async () => {
