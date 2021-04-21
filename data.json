@@ -16,7 +16,7 @@
     "inviteLink": "https://discord.com/oauth2/authorize?client_id=831172728816009327&scope=bot&permissions=2147483647",
     "logErrors": true,
 
-    "devMode": true,
+    "devMode": false,
     "token2": "ODMzNzI3NTg1MzAxMTY4MTQ4.YH2jUg.qDr92LEdiD0Zo6kk-9Afa0Awz9o",
     "dprefix": "d!"
 }
