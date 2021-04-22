@@ -19,7 +19,7 @@ module.exports = {
             }
 
             const code = args.join(" ");
-            const evalCode = await eval(code).then(code => {
+            const evalCode = await Promise.resolve(eval(code)).then(code => {
                 let embed = new Discord.MessageEmbed()
                     .setColor('#55FF55')
                     .setTimestamp()
@@ -28,7 +28,7 @@ module.exports = {
                     .addField("To eval:", `\`\`\`js\n${args.join(" ")}\n\`\`\``)
                     .addField("Eval:", `\`\`\`js\n${code}\n\`\`\``);
                 message.channel.send(embed)
-            })
+            }, )
         } catch (e) {
             let embed = new Discord.MessageEmbed()
                 .setColor('#FF5555')
