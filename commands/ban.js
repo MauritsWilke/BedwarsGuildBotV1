@@ -7,31 +7,33 @@ module.exports = {
 
         if (message.member.permissions.has("BAN_MEMBERS")) {
             const member = message.mentions.users.first();
-            const reason = "None"
-            reason = args.slice(1).join(' ');
+            let reason = "None";
+            if(args[1]){
+                reason = args.slice(1).join(' ');
+            }
 
-            if(member.id == client.user.id){
+            if(member){
+                if(member.id == client.user.id){
                 
-                const cantBanSelf = new Discord.MessageEmbed()
-                .setTitle("Cannot ban bot itself")
-                .setDescription("Sorry you just cant")
-                .setTimestamp()
-                .setFooter(config.name + '     ');
-                message.channel.send(cantBanSelf);
-                return;
-
-            }else if(member.id == message.author.id){
-
-                const cantBanSelf = new Discord.MessageEmbed()
-                .setTitle("Cannot ban yourself")
-                .setDescription("Sorry you just cant")
-                .setTimestamp()
-                .setFooter(config.name + '     ');
-                message.channel.send(cantBanSelf);
-                return;
-
-            }{
-            if (member) {
+                    const cantBanSelf = new Discord.MessageEmbed()
+                    .setTitle("Cannot ban the bot itself")
+                    .setDescription("Sorry you just cant")
+                    .setTimestamp()
+                    .setFooter(config.name + '     ');
+                    message.channel.send(cantBanSelf);
+                    return;
+    
+                }else if(member.id == message.author.id){
+    
+                    const cantBanSelf = new Discord.MessageEmbed()
+                    .setTitle("Cannot ban yourself")
+                    .setDescription("Sorry you just cant")
+                    .setTimestamp()
+                    .setFooter(config.name + '     ');
+                    message.channel.send(cantBanSelf);
+                    return;
+    
+                }
                 const memberTarget = message.guild.members.cache.get(member.id);
                 memberTarget.ban({ days: 0, reason: reason }).catch(error => message.channel.send(`Sorry ${message.author} I couldn't ban because I am missing permissions.`));
                 
@@ -45,14 +47,12 @@ module.exports = {
                 .setTimestamp()
                 .setFooter(config.name + '     ');
                 message.channel.send(hasBeenBanned);
-                return;
-
-            } else {
-                message.reply("Please include an @ of a member to ban");
+                return; 
+            
+            }else {
+                message.reply("Please include an @ of a member to kick");
             }
-        }
-
-        } else {
+            } else {
             message.channel.send('You do not have the permission to use this command, please contact a server admin if you think this is incorrect.');
         }
     }
