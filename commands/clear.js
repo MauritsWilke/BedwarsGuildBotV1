@@ -1,7 +1,9 @@
+const config = require('../data.json')
+
 module.exports = {
     name: 'clear',
     description: "Clear X messages",
-    async execute(message, args) {
+    async execute(message, args, Discord, client) {
 
         if (message.member.permissions.has("MANAGE_MESSAGES")) {
 
@@ -12,6 +14,20 @@ module.exports = {
 
                 await message.channel.messages.fetch({ limit: args[0] }).then(messages => {
                     message.channel.bulkDelete(messages);
+
+                    const doesntExist = new Discord.MessageEmbed()
+                    .setColor(config.colour)
+                    .setTitle(`Deleted ${args[0]} messages in #${message.channel.name}`)
+                    .setDescription(`Deleted by: ${message.author}`)
+                    .setAuthor(config.name, client.user.displayAvatarURL())
+                    .setTimestamp()
+                    .setFooter(config.name);
+
+                    message.channel.send(doesntExist)
+                    .then(msg =>{
+                        setTimeout(() => msg.delete(), 5000)
+                    })
+
                 });
                 
         } else {

@@ -1,4 +1,4 @@
-const DATA = require('../data.json');
+const config = require('../data.json');
 const fetch = require('node-fetch');
 const colours = require('../colours.json');
 
@@ -16,7 +16,7 @@ module.exports = {
             return data;
         };
         const hyData = async (playerUUID) => {
-            const response = await fetch(`https://api.hypixel.net/player?uuid=${apiData.id}&key=${DATA.hypixelAPIKey}`);
+            const response = await fetch(`https://api.hypixel.net/player?uuid=${apiData.id}&key=${config.hypixelAPIKey}`);
             if(response.status !== 200){
                 message.channel.send("There might be an API outtage"); return;
             }else if(response.player === null){
@@ -36,9 +36,9 @@ module.exports = {
             const doesntExist = new Discord.MessageEmbed()
             .setColor(`#FF5555`)
             .setTitle(`${args[0]} is not a valid username!`)
-            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setAuthor(config.name, client.user.displayAvatarURL())
             .setTimestamp()
-            .setFooter(DATA.name);
+            .setFooter(config.name);
 
             message.channel.send(doesntExist)
             return;
@@ -59,10 +59,10 @@ module.exports = {
             const notPlayed = new Discord.MessageEmbed()
             .setColor(`#FF5555`)
             .setTitle(apiData.name + ' has not played bedwars')
-            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setAuthor(config.name, client.user.displayAvatarURL())
             .setThumbnail(playerHead)
             .setTimestamp()
-            .setFooter(DATA.name);
+            .setFooter(config.name);
 
             message.channel.send(notPlayed)
             return;
@@ -71,7 +71,7 @@ module.exports = {
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)
         .setTitle('Index Score of ' + apiData.name.replace(/_/g, '\\_'))
-        .setAuthor(DATA.name, client.user.displayAvatarURL())
+        .setAuthor(config.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(
             { name: 'Star', value: playerStar, inline: false},
@@ -79,7 +79,7 @@ module.exports = {
             { name: 'Index', value: NaNtoZero(indexScore), inline: false},
         )
         .setTimestamp()
-        .setFooter(DATA.name);
+        .setFooter(config.name);
     
         message.channel.send(newEmbed);
         }

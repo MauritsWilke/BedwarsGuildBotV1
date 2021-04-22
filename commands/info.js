@@ -1,4 +1,4 @@
-const DATA = require('../data.json');
+const config = require('../data.json');
 const fetch = require('node-fetch');
 
 module.exports = {
@@ -14,20 +14,20 @@ module.exports = {
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setTitle(DATA.name + " Info")
-        .setAuthor(DATA.name, client.user.displayAvatarURL())
+        .setTitle(config.name + " Info")
+        .setAuthor(config.name, client.user.displayAvatarURL())
         .setThumbnail(client.user.displayAvatarURL())
         .addFields(
             { name: 'Ping', value: `${client.ws.ping}ms`, inline: true},
             { name: 'Uptime', value: `${hours}h ${minutes}m ${seconds}s`, inline: true},
-            { name: 'Dev', value: `${DATA.ownerDiscord}`, inline: true},
+            { name: 'Dev', value: `${config.ownerDiscord}`, inline: true},
 
             { name: 'Servers', value: `${client.guilds.cache.size}`, inline: true},
             { name: 'Channels', value: `${client.channels.cache.size}`, inline: true},
             { name: 'Users', value: `${client.users.cache.size}`, inline: true}
         )
         .setTimestamp()
-        .setFooter(DATA.name);
+        .setFooter(config.name);
         
         message.channel.send(newEmbed);
 

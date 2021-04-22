@@ -1,4 +1,4 @@
-var DATA = require("../data.json");
+var config = require("../data.json");
 
 module.exports = {
     name: 'manualindex',
@@ -13,7 +13,7 @@ module.exports = {
             const newEmbed = new Discord.MessageEmbed()
             .setColor('#FAFAFA')
             .setTitle('Manual Index Score')
-            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setAuthor(config.name, client.user.displayAvatarURL())
             .setThumbnail("https://cdn.discordapp.com/attachments/834039658391928852/834086824309293097/math.png")
             .addFields(
                 { name: 'Star', value: args[0].replace(",","."), inline: true},
@@ -21,7 +21,7 @@ module.exports = {
                 { name: 'Index score', value: indexScore.toFixed(2), inline: false},
             )
             .setTimestamp()
-            .setFooter(DATA.name);
+            .setFooter(config.name);
         
             message.channel.send(newEmbed);
         }

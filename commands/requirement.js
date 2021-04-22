@@ -1,4 +1,4 @@
-var DATA = require("../data.json");
+var config = require("../data.json");
 const fetch = require('node-fetch');
 const { GuildMember, Guild } = require("discord.js");
 
@@ -18,7 +18,7 @@ module.exports = {
             return data;
         };
         const hyData = async (playerUUID) => {
-            const response = await fetch(`https://api.hypixel.net/player?uuid=${playerUUID}&key=${DATA.hypixelAPIKey}`);
+            const response = await fetch(`https://api.hypixel.net/player?uuid=${playerUUID}&key=${config.hypixelAPIKey}`);
             if(response.status !== 200){
                 message.channel.send("There might be an API outtage"); return;
             }else if(response.player === null){
@@ -75,10 +75,10 @@ module.exports = {
             const notPlayed = new Discord.MessageEmbed()
             .setColor(`#FF5555`)
             .setTitle(apiData.name + ' has not joined Hypixel')
-            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setAuthor(config.name, client.user.displayAvatarURL())
             .setThumbnail(playerHead)
             .setTimestamp()
-            .setFooter(DATA.name);
+            .setFooter(config.name);
 
             message.channel.send(notPlayed)
             return;
@@ -87,7 +87,7 @@ module.exports = {
         const newEmbed = new Discord.MessageEmbed()
         .setColor(colour)
         .setTitle('Requirement Score Of ' + apiData.name.replace(/_/g, '\\_'))
-        .setAuthor(DATA.name, client.user.displayAvatarURL())
+        .setAuthor(config.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(
             { name: 'In The Discord', value: `${meetsOne} ${checkForDiscord()}`, inline: false},
@@ -95,7 +95,7 @@ module.exports = {
             { name: 'Index score of 30+ ', value: `${meetsThree} ${NaNtoZero(indexScore)}`, inline: false},
         )
         .setTimestamp()
-        .setFooter(DATA.name);
+        .setFooter(config.name);
     
         message.channel.send(newEmbed);
 

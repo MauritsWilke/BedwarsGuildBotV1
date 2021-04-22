@@ -1,4 +1,4 @@
-/*var DATA = require("../data.json");
+/*var config = require("../data.json");
 var mojangAPI = require('mojang-api');
 const fetch = require("node-fetch");
 
@@ -6,7 +6,7 @@ module.exports = {
     name: 'Abwtest',
     description: "Check if author is Admin",
     execute(message, args) {
-        let API_URL = "https://api.hypixel.net/player?key=" + DATA.hypixelAPIKey + "&uuid=";
+        let API_URL = "https://api.hypixel.net/player?key=" + config.hypixelAPIKey + "&uuid=";
 
         if (args[0]) {
 

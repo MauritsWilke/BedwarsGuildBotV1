@@ -1,18 +1,11 @@
 const Discord = require('discord.js');
 const gm  = new Discord.GuildMember();
 const fs = require('fs');
-var DATA = require("./data.json");
+var config = require("./data.json");
 var packageLock = require("./package-lock.json");
 const memberCounter = require('./counters/member-counter');
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 let clientPrefix;
-
-if(DATA.devMode === true){
-    clientPrefix = DATA.dprefix;
-}else {
-    clientPrefix = DATA.prefix;
-}
-console.log(clientPrefix)
 
 client.commands = new Discord.Collection();
 
@@ -25,8 +18,8 @@ for (const file of commandFiles) {
 }
 
 client.once('ready', () => {
-    console.log(DATA.name + ' is online [ ' + Date().toString().slice(4,24) + ' ]');
-    console.log("Running version: " + DATA.version + " using Discord.js version: " + packageLock.packages['node_modules/discord.js'].version);
+    console.log(config.name + ' is online [ ' + Date().toString().slice(4,24) + ' ]');
+    console.log("Running version: " + config.version + " using Discord.js version: " + packageLock.packages['node_modules/discord.js'].version);
     // memberCounter(client);
 
     client.user.setPresence({
@@ -39,23 +32,23 @@ client.once('ready', () => {
 
     const newEmbed = new Discord.MessageEmbed()
     .setColor('#0099ff')
-    .setTitle(DATA.name + " is online")
-    .setAuthor(DATA.name, client.user.displayAvatarURL())
+    .setTitle(config.name + " is online")
+    .setAuthor(config.name, client.user.displayAvatarURL())
     .setThumbnail(client.user.displayAvatarURL())
     .addFields(
         { name: 'Started at', value: `${Date().toString().slice(4,24)}`, inline: true},
-        { name: 'Version', value: `${DATA.version}`, inline: true},
+        { name: 'Version', value: `${config.version}`, inline: true},
         { name: 'Discord.js', value: `v${packageLock.packages['node_modules/discord.js'].version}`, inline: true},
 
-        { name: 'Dev Mode ', value: DATA.devMode, inline: true},
+        { name: 'Dev Mode ', value: config.devMode, inline: true},
         { name: 'Prefix', value: clientPrefix, inline: true},
         { name: 'Ping', value: client.ws.ping, inline: true}
     )
     .setTimestamp()
-    .setFooter(DATA.name);
+    .setFooter(config.name);
 
     (async () => {
-        const user = await client.users.fetch(DATA.ownerID);
+        const user = await client.users.fetch(config.ownerID);
         user.send(newEmbed);
     })()
 
@@ -79,7 +72,7 @@ client.on('message', message => {
             console.log(command + " was used by [" + message.author.username + "] in server [" + message.guild.name + "] at [" + timestamp + "]");
         } catch (error) {
             // message.channel.send('There might have been an error processing this command, or the command does not exist.');
-            if (DATA.logErrors) console.log(error);
+            if (config.logErrors) console.log(error);
         };
     }
 })
@@ -98,10 +91,12 @@ client.on('guildMemberRemove',(member) => {
     
 });
 
-if(DATA.devMode === true){
-    client.login(DATA.token2);
-    console.log("!! IN DEV MODE !!");
-}else {
-    client.login(DATA.token);
-    console.log("Global Mode");
+if(process.env.TOKEN){
+    client.login(process.env.TOKEN)
+    clientPrefix = config.prefix;
+    console.log(`Global Mode | ${clientPrefix}`);
+}else{
+    client.login(config.token2);
+    clientPrefix = config.dprefix;
+    console.log(`!! IN DEV MODE !! | ${clientPrefix}`);
 }

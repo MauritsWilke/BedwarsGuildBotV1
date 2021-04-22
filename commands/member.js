@@ -1,4 +1,4 @@
-var DATA = require("../data.json");
+var config = require("../data.json");
 const Discord = require('discord.js');
 const gm  = new Discord.GuildMember();
 
@@ -12,13 +12,13 @@ module.exports = {
         const byeEmbed = new Discord.MessageEmbed()
         .setTitle("Farewell, " + args[0].username)
         .setThumbnail(args[0].avatarURL)
-        .setColor(DATA.colour)
+        .setColor(config.colour)
         .addFields(
             { name: 'Joined at: ', value: gm.joinedAt, inline: false},
             { name: 'Left at: ', value: new Date().toString().slice(4,24), inline: false},
         )
         .setTimestamp()
-        .setFooter(DATA.name + '     ');
+        .setFooter(config.name + '     ');
         
         message.channel.send(byeEmbed)
 

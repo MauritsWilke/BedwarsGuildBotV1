@@ -1,4 +1,4 @@
-const DATA = require('../data.json');
+const config = require('../data.json');
 const fetch = require('node-fetch');
 const colours = require('../colours.json');
 
@@ -21,9 +21,9 @@ module.exports = {
             const doesntExist = new Discord.MessageEmbed()
             .setColor(`#FF5555`)
             .setTitle(`${args[0]} is not a valid username!`)
-            .setAuthor(DATA.name, client.user.displayAvatarURL())
+            .setAuthor(config.name, client.user.displayAvatarURL())
             .setTimestamp()
-            .setFooter(DATA.name);
+            .setFooter(config.name);
 
             message.channel.send(doesntExist)
             return;
@@ -38,13 +38,13 @@ module.exports = {
         const newEmbed = new Discord.MessageEmbed()
         .setColor('#0000AA')
         .setTitle('UUID of ' + player.name.replace(/_/g, '\\_'))
-        .setAuthor(DATA.name, client.user.displayAvatarURL())
+        .setAuthor(config.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(
             { name: 'UUID', value: player.id, inline: false}
         )
         .setTimestamp()
-        .setFooter(DATA.name);
+        .setFooter(config.name);
     
         message.channel.send(newEmbed);
 

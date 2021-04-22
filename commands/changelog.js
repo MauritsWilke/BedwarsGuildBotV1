@@ -1,4 +1,4 @@
-var DATA = require("../data.json");
+var config = require("../data.json");
 
 module.exports = {
     name: 'changelog',
@@ -9,14 +9,14 @@ module.exports = {
         .setColor('#0099ff')
         .setTitle('Changelog')
         //.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
-        .setDescription('Most recent changelog from version ' + DATA.version)
+        .setDescription('Most recent changelog from version ' + config.version)
         .setThumbnail(client.user.displayAvatarURL())
         .addFields(
-            { name: 'Changes made: ', value: DATA.changelog },
-            { name: 'Bully cats with this: ', value: DATA.makecatsdothis }
+            { name: 'Changes made: ', value: config.changelog },
+            { name: 'Bully cats with this: ', value: config.makecatsdothis }
         )
         .setTimestamp()
-        .setFooter(DATA.name + '     ');
+        .setFooter(config.name + '     ');
         
         message.channel.send(newEmbed);
     }

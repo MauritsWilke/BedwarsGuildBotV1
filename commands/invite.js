@@ -1,4 +1,4 @@
-var DATA = require("../data.json");
+var config = require("../data.json");
 
 module.exports = {
     name: 'invite',
@@ -7,12 +7,12 @@ module.exports = {
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setTitle('Invite ' + DATA.name)
-        .setAuthor(DATA.name, client.user.displayAvatarURL())
-        .setDescription('Invite the bot here: ' + DATA.inviteLink)
+        .setTitle('Invite ' + config.name)
+        .setAuthor(config.name, client.user.displayAvatarURL())
+        .setDescription('Invite the bot here: ' + config.inviteLink)
         .setThumbnail(client.user.displayAvatarURL())
         .setTimestamp()
-        .setFooter(DATA.name);
+        .setFooter(config.name);
         
         message.channel.send(newEmbed);
 
