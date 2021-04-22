@@ -42,8 +42,7 @@ client.once('ready', () => {
 
         { name: 'Dev Mode ', value: config.devMode, inline: true},
         { name: 'Prefix', value: clientPrefix, inline: true},
-        { name: 'Ping', value: client.ws.ping, inline: true}
-    )
+        { name: 'Ping', value: client.ws.ping, inline: true})
     .setTimestamp()
     .setFooter(config.name);
 
@@ -71,25 +70,10 @@ client.on('message', message => {
             client.commands.get(command).execute(message, args, Discord, client);
             console.log(command + " was used by [" + message.author.username + "] in server [" + message.guild.name + "] at [" + timestamp + "]");
         } catch (error) {
-            // message.channel.send('There might have been an error processing this command, or the command does not exist.');
             if (config.logErrors) console.log(error);
         };
     }
 })
-
-// client.on('guildMemberAdd', guildMember =>{
-//     let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === 'Gamer');
- 
-//     guildMember.roles.add(welcomeRole);
-//     guildMember.guild.channels.cache.get('798114509675167767').send(`Welcome to ` + guildMember.guild.name + `, <@${guildMember.user.id}>!`);
-
-// });
-
-client.on('guildMemberRemove',(member) => {
-
-    
-    
-});
 
 if(process.env.TOKEN){
     client.login(process.env.TOKEN)
