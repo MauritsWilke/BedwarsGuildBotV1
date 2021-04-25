@@ -54,6 +54,13 @@ module.exports = {
         let playerFKDR = (playerData?.player?.stats?.Bedwars?.final_kills_bedwars / playerData?.player?.stats?.Bedwars?.final_deaths_bedwars).toFixed(2);
         let indexScore = ((playerStar *playerFKDR*playerFKDR)/10).toFixed(2);
         let colour = colours[Math.floor(playerStar/100)];
+        let starNeeded = "-";
+        let FKDRNeeded = "-";
+
+        if(indexScore < 30){
+            starNeeded = ((30 * 10)/(playerFKDR*playerFKDR)).toFixed(2);
+            FKDRNeeded = (Math.sqrt((30 * 10)/playerStar)).toFixed(2);
+        }
 
         if(playerStar === undefined){
             const notPlayed = new Discord.MessageEmbed()
@@ -74,8 +81,12 @@ module.exports = {
         .setAuthor(config.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(
-            { name: 'Star', value: playerStar, inline: false},
-            { name: 'FKDR', value: NaNtoZero(playerFKDR), inline: false},
+            { name: 'Star', value: playerStar, inline: true},
+            { name: 'Needed', value: starNeeded, inline: true},
+            { name: '\u200B', value: '\u200B', inline: true},
+            { name: 'FKDR', value: NaNtoZero(playerFKDR), inline: true},
+            { name: 'Needed', value: FKDRNeeded, inline: true},
+            { name: '\u200B', value: '\u200B', inline: true},
             { name: 'Index', value: NaNtoZero(indexScore), inline: false},
         )
         .setTimestamp()
