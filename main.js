@@ -41,7 +41,7 @@ client.once('ready', () => {
         { name: 'Version', value: `${config.version}`, inline: true},
         { name: 'Discord.js', value: `v${packageLock.packages['node_modules/discord.js'].version}`, inline: true},
 
-        { name: 'Dev Mode ', value: config.devMode, inline: true},
+        { name: 'Dev Mode ', value: devModeOn, inline: true},
         { name: 'Prefix', value: clientPrefix, inline: true},
         { name: 'Ping', value: client.ws.ping, inline: true})
     .setTimestamp()
