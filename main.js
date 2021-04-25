@@ -6,6 +6,7 @@ var packageLock = require("./package-lock.json");
 const memberCounter = require('./counters/member-counter');
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 let clientPrefix;
+let devModeOn;
 
 client.commands = new Discord.Collection();
 
@@ -78,9 +79,11 @@ client.on('message', message => {
 if(process.env.TOKEN){
     client.login(process.env.TOKEN)
     clientPrefix = config.prefix;
+    devModeOn = false;
     console.log(`Global Mode | ${clientPrefix}`);
 }else{
     client.login(config.token2);
     clientPrefix = config.dprefix;
+    devModeOn = true;
     console.log(`!! IN DEV MODE !! | ${clientPrefix}`);
 }
