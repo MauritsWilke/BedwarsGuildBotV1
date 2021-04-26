@@ -31,6 +31,19 @@ module.exports = {
             if(isNaN(s)) return '0';
             return `${s}`;
         }
+        const checkForDiscord = () =>{
+            if(playerData?.player?.socialMedia?.links?.DISCORD){
+                playerDiscordName = playerData.player.socialMedia.links.DISCORD; 
+
+                if(message.guild.members.fetch({query: playerDiscordName})){
+                    return [playerDiscordName, true]
+                }
+
+                return [playerDiscordName, false]
+                
+            };
+            playerDiscordName = "This player has not linked their discord"; return [playerDiscordName, false];
+        }
 
         let apiData = await getID(args[0]);
         let playerHead = `https://minotar.net/helm/${apiData.id}`
@@ -46,28 +59,14 @@ module.exports = {
         let lastJoined = new Date(playerData?.player?.lastLogin);
         let currentDate = new Date();
         let daysBetween = Math.floor((currentDate - lastJoined)/(1000*60*60*24));
-        let playerDiscord;
-
-        const checkForDiscord = () =>{
-            if(playerData?.player?.socialMedia?.links?.DISCORD){ playerDiscord = playerData.player.socialMedia.links.DISCORD; return playerDiscord};
-            playerDiscord = "This player has not linked their discord"; return playerDiscord;
-        }
-
-
-        const isInDiscord = () =>{
-            if(checkForDiscord() !== "This player has not linked their discord"){
-                if(client.users.cache.find(u => u.tag === checkForDiscord()).id === message.guild.members(client.users.cache.find(u => u.tag === checkForDiscord()).id)){
-                    return true;
-                };
-            }else return false;
-        }
+        let playerDiscord = checkForDiscord();
 
         let colour = '#FF5555';
         let meetsOne = `:x:`;
         let meetsTwo = `:x:`;
         let meetsThree = `:x:`;
-                                                                        // && isInDiscord() == true
-        if(checkForDiscord() !== "This player has not linked their discord") meetsOne = ':white_check_mark:';
+                                                                        
+        if(playerDiscord[1] !== false) meetsOne = ':white_check_mark:';
         if(daysBetween < 7) meetsTwo = ':white_check_mark:';
         if(indexScore > 30) meetsThree = ':white_check_mark:';
         if(indexScore > 30 && daysBetween < 7 && checkForDiscord() !== "This player has not linked their discord") colour = '#55FF55';
@@ -90,7 +89,7 @@ module.exports = {
         .setAuthor(config.name, client.user.displayAvatarURL())
         .setThumbnail(playerHead)
         .addFields(
-            { name: 'In The Discord', value: `${meetsOne} ${checkForDiscord()}`, inline: false},
+            { name: 'In The Discord', value: `${meetsOne} ${playerDiscord[0]}`, inline: false},
             { name: 'Active at least once a week', value: `${meetsTwo} Last login at ${lastJoined.toString().slice(4,15)}`, inline: false},
             { name: 'Index score of 30+ ', value: `${meetsThree} ${NaNtoZero(indexScore)}`, inline: false},
         )
