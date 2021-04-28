@@ -3,7 +3,7 @@ const config = require('./data.json')
 
 module.exports = {
     getMojangData: async (username) => {
-        if(!username.match(/[a-z]\d*\_*/i)) return Promise.reject(`${username} is an invalid username`);
+        if(!username.match(/^[a-z0-9_]*$/i)) return Promise.reject(`${username} is an invalid username`);
         const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
         if(response.status !== 200) return Promise.reject(`${username} is not an existing player`);
         return await response.json();
