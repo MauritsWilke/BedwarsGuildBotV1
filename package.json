@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Custom Discord Bot",
   "main": "main.js",
-  
   "author": "I_Like_Cats__",
   "license": "ISC",
   "dependencies": {
+    "ascii-table": "^0.0.9",
     "canvas": "^2.7.0",
     "discord.js": "^12.5.1",
     "mojang-api": "^0.0.2",

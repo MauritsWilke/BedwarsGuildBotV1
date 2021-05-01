@@ -11,7 +11,7 @@ module.exports = {
 
         let player = await utils.returnHypixelData(args[0]).then(p =>{
             //NEVER PLAYED BEDWARS
-            if(!p.player.stats?.Bedwars){
+            if(!p.player?.stats?.Bedwars){
                 const errorEmbed = new Discord.MessageEmbed()
                     .setColor(`#FF5555`)
                     .setTitle(`${p.player.displayname} has not played bedwars`)

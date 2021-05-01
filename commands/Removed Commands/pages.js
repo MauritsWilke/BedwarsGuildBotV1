@@ -1,6 +1,6 @@
-const config = require('../data.json');
-const utils = require('../utils.js');
-const colours = require('../colours.json');
+const config = require('../../data.json');
+const utils = require('../../utils.js');
+const colours = require('../../colours.json');
 
 module.exports = {
     name: 'page',

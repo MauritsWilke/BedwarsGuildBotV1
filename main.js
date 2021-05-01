@@ -4,19 +4,23 @@ const fs = require('fs');
 var config = require("./data.json");
 var packageLock = require("./package-lock.json");
 const memberCounter = require('./counters/member-counter');
+const AsciiTable = require('ascii-table')
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 let clientPrefix;
 let devModeOn;
 
 client.commands = new Discord.Collection();
 
+let table = new AsciiTable('')
+.setHeading("Command", "Status");
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
     client.commands.set(command.name, command);
-    console.log(command);
+    table.addRow(`${command.name}`,"✅");
 }
+console.log(table.toString())
 
 client.once('ready', () => {
     console.log(config.name + ' is online [ ' + Date().toString().slice(4,24) + ' ]');
