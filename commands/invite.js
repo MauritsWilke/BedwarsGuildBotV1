@@ -7,9 +7,9 @@ module.exports = {
 
         const newEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setTitle('Invite ' + config.name)
+        //.setTitle('Invite ' + config.name)
         .setAuthor(config.name, client.user.displayAvatarURL())
-        .setDescription('Invite the bot here: ' + config.inviteLink)
+        .setDescription(`Click [here](${config.inviteLink}) to invite the bot!`)
         .setThumbnail(client.user.displayAvatarURL())
         .setTimestamp()
         .setFooter(config.name);

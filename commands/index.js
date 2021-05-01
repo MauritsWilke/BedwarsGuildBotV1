@@ -25,7 +25,6 @@ module.exports = {
             let star = p.player.achievements.bedwars_level;
             let FKDR = p.player.stats.Bedwars.final_kills_bedwars / p.player.stats.Bedwars.final_deaths_bedwars;
             let index = (star * FKDR * FKDR)/10;
-
             if(index < 30){
                 starNeeded = ((30 * 10)/((FKDR*FKDR))).toFixed(2);
                 FKDRNeeded = (Math.sqrt((30 * 10)/star)).toFixed(2);

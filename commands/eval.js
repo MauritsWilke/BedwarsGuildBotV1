@@ -6,11 +6,11 @@ module.exports = {
     async execute(message, args, Discord, client){
         
         if(message.author.id !== config.ownerID) {
-            return message.channel.send("You're not the bot owner *kid*").then(m => m.delete({ timeout: 5000}))
+            return message.channel.send("You're not the bot owner *kid*").then(m => m.delete({ timeout: 5000})).catch(e =>{});
         }
         
         if(!args[0]){
-            return message.channel.send("Please include code to evalute").then(m => m.delete({ timeout: 5000}));
+            return message.channel.send("Please include code to evalute").then(m => m.delete({ timeout: 5000})).catch(e =>{});
         }
 
         try {

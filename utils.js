@@ -5,12 +5,11 @@ module.exports = {
     getMojangData: async (username) => {
         if(!username.match(/^[a-z0-9_]*$/i)) return Promise.reject(`${username} is an invalid username`);
         const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
-        if(response.status !== 200) return Promise.reject(`${username} is not an existing player`);
+        if(response.status !== 200) return Promise.reject(`${username} does not exist`);
         return await response.json();
     },
 
     getHypixelData: async (playerUUID) => {
-        console.log(playerUUID)
         if(!playerUUID.match(/[\d-]/i)) return Promise.reject(`Please submit a valid UUID`);
         const response = await fetch(`https://api.hypixel.net/player?uuid=${playerUUID}&key=${config.hypixelAPIKey}`);
         if(response.status !== 200) return Promise.reject(`API Outage`);
