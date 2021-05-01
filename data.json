@@ -13,7 +13,8 @@
 
     "changelog": "24/7 Hosting! 🥳 \nAdded \"!announcement\"\nFixed a lot of bugs (really a lot)",
     "makecatsdothis": "Nothing :D",
-    "inviteLink": "https://discord.com/oauth2/authorize?client_id=831172728816009327&scope=bot&permissions=2147483647",
+    "inviteLink": "https://discord.com/oauth2/authorize?client_id=815986701071548427&scope=bot&permissions=67554368&redirect_uri=http%3A%2F%2Fwww.mauritswilke.com",
+    "inviteLinkAdmin": "",
     "logErrors": true,
 
     "devMode": true,

@@ -9,7 +9,7 @@ module.exports = {
         .setColor('#0099ff')
         //.setTitle('Invite ' + config.name)
         .setAuthor(config.name, client.user.displayAvatarURL())
-        .setDescription(`Click [here](${config.inviteLink}) to invite the bot!`)
+        .setDescription(`Click [here](${config.inviteLink}) to invite the bot!\nClick [here](${config.inviteLinkAdmin}) to invite the bot with admin perms (kick and ban commands)`)
         .setThumbnail(client.user.displayAvatarURL())
         .setTimestamp()
         .setFooter(config.name);
