@@ -1,10 +1,13 @@
+//DEP
 const Discord = require('discord.js');
-const gm  = new Discord.GuildMember();
 const fs = require('fs');
 var config = require("./data.json");
 var packageLock = require("./package-lock.json");
-const memberCounter = require('./counters/member-counter');
 const AsciiTable = require('ascii-table')
+
+//MAYBE CAN GO?
+const gm  = new Discord.GuildMember();
+const memberCounter = require('./counters/member-counter');
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 let clientPrefix;
 let devModeOn;

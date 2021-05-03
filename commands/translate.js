@@ -1,7 +1,7 @@
 const config = require('../data.json');
 
 module.exports = {
-    name: 'translate',
+    name: 'enchant',
     description: "Translate to enchantment table!",
     execute(message, args, Discord, client){
 
