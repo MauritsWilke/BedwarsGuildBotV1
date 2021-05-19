@@ -17,14 +17,10 @@ module.exports = {
             let daysBetween = Math.floor((new Date() - new Date(p.player?.lastLogin))/(1000*60*60*24))
             let playerDiscord = p.player?.socialMedia?.links?.DISCORD;
 
-            if(Promise.resolve(message.guild.members.fetch(client.users.cache.get(playerDiscord)?.id)) !== undefined) meetsOne = ':white_check_mark:';
-            else meetsOne = `:x:`;
-            if(daysBetween < 7) meetsTwo = ':white_check_mark:';
-            else meetsTwo = `:x:`;
-            if(index > 30) meetsThree = ':white_check_mark:';
-            else meetsThree = `:x:`;
-            if(index > 30 && daysBetween < 7) colour = '#55FF55';
-            else colour = '#FF5555';
+            client.users.cache.find(u => u?.tag === playerDiscord)?.id !== undefined ? meetsOne = ':white_check_mark:' : meetsOne = `:x:`;
+            daysBetween <= 7 ? meetsTwo = ':white_check_mark:' : meetsTwo = `:x:`;
+            index >= 30 ? meetsThree = ':white_check_mark:' : meetsThree = `:x:`;
+            index > 30 && daysBetween <= 7 ? colour = '#55FF55' : colour = '#FF5555';
 
             const newEmbed = new Discord.MessageEmbed()
                 .setColor(colour)
@@ -37,7 +33,7 @@ module.exports = {
                     { name: 'Index score of 30+ ', value: `${meetsThree} ${utils.NaNtoZero(index.toFixed(2))}`, inline: false},
                 )
                 .setTimestamp()
-                .setFooter(config.name + "\nDisclaimer: does not actually check if user is in discord cuz im bad at programming pls send help\n");
+                .setFooter(config.name);
             message.channel.send(newEmbed);
 
         }).catch(e => {
