@@ -25,7 +25,7 @@ module.exports = {
             let FKDR = p.player.stats.Bedwars.final_kills_bedwars / p.player.stats.Bedwars.final_deaths_bedwars;
             let index = (star * FKDR * FKDR)/10;
             let daysBetween = Math.floor((new Date() - new Date(p.player?.lastLogin))/(1000*60*60*24))
-            let playerDiscord = p.player?.socialMedia?.links?.DISCORD;
+            let playerDiscord = (p.player?.socialMedia?.links?.DISCORD === undefined) ? "Not linked" : p.player?.socialMedia?.links?.DISCORD;
 
             client.users.cache.find(u => u?.tag === playerDiscord)?.id !== undefined ? meetsOne = ':white_check_mark:' : meetsOne = `:x:`;
             daysBetween <= 7 ? meetsTwo = ':white_check_mark:' : meetsTwo = `:x:`;
