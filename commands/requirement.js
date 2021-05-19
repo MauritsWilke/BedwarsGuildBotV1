@@ -11,6 +11,16 @@ module.exports = {
 
         let player = await utils.returnHypixelData(args[0]).then(p =>{
 
+            if(!p.player?.stats?.Bedwars){
+                const errorEmbed = new Discord.MessageEmbed()
+                    .setColor(`#FF5555`)
+                    .setTitle(`${args[0]} has not played bedwars`)
+                    .setThumbnail("https://cdn.discordapp.com/attachments/834039658391928852/834415883454644244/exmark.png")
+                    .setTimestamp()
+                    .setFooter(config.name, client.user.displayAvatarURL());
+                return message.channel.send(errorEmbed)
+            }
+
             let star = p.player.achievements.bedwars_level;
             let FKDR = p.player.stats.Bedwars.final_kills_bedwars / p.player.stats.Bedwars.final_deaths_bedwars;
             let index = (star * FKDR * FKDR)/10;
@@ -20,7 +30,7 @@ module.exports = {
             client.users.cache.find(u => u?.tag === playerDiscord)?.id !== undefined ? meetsOne = ':white_check_mark:' : meetsOne = `:x:`;
             daysBetween <= 7 ? meetsTwo = ':white_check_mark:' : meetsTwo = `:x:`;
             index >= 30 ? meetsThree = ':white_check_mark:' : meetsThree = `:x:`;
-            index > 30 && daysBetween <= 7 ? colour = '#55FF55' : colour = '#FF5555';
+            index > 30 && daysBetween <= 7 && client.users.cache.find(u => u?.tag === playerDiscord)?.id !== undefined ? colour = '#55FF55' : colour = '#FF5555';
 
             const newEmbed = new Discord.MessageEmbed()
                 .setColor(colour)
