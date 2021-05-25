@@ -21,3 +21,6 @@ Discord: The Almighty One#3989
  - Ternary Operators (the beginning)
  - Familiarised with Discord.js V12
  - (some) Regex
+
+
+also, any tokens and api keys in this file are depricated
